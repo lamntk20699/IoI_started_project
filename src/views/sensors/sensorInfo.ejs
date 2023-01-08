@@ -1,0 +1,104 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SensorInfo</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+    <h1>This is information about sensor</h1>
+    
+    <div>
+        <div class="w3-container">
+            <h2>List users Table</h2>
+
+            <table class="w3-table-all w3-hoverable">
+                <thead>
+                    <tr class="w3-light-grey">
+                        <th>ID</th>
+                        <th>Packet No.</th>
+                        <th>Temparature</th>
+                        <th>Humidity</th>
+                        <th>Tds</th>
+                        <th>pH</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <% for(let i=0; i < dataFetched.length; i++) { %>
+                        <tr>
+                            <td>
+                                <%= dataFetched[i].id %>
+                            </td>
+                            <td>
+                                <%= dataFetched[i].packet_no %>
+                            </td>
+                            <td>
+                                <%= dataFetched[i].temparature %>
+                            </td>
+                            <td>
+                                <%= dataFetched[i].humidity %>
+                            </td>
+                            <td>
+                                <%= dataFetched[i].tds %>
+                            </td>
+                            <td>
+                                <%= dataFetched[i].pH %>
+                            </td>
+                            <td style="display: flex; gap: 15px;">
+                                <form>
+                                    <a class="btn-detail" href="/detail/user/<%= dataFetched[i].id %>"
+                                        target="_blank">Detail</a>
+                                </form>
+                                <form action="/edit-user/<%= dataFetched[i].id %>" method="GET">
+                                    <button type="submit">Edit</button>
+                                </form>
+                                <form action="/delete-user" method="POST">
+                                    <input type="text" hidden value="<%= dataFetched[i].id %>" name="userId" />
+                                    <button type="submit">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <% } %>
+                </tbody>
+
+
+            </table>
+        </div>
+        <div class="create-user-container">
+            <form action="/create-new-data" method="POST">
+                <div><b>Post new data:</b></div>
+                <div>
+                    <label>Packet No.:</label>
+                    <input type="number" name="packet" />
+                </div>
+                <div>
+                    <label>Temparature:</label>
+                    <input type="number" name="number" />
+                </div>
+                <div>
+                    <label>Humidity:</label>
+                    <input type="number" name="humidity" />
+                </div>
+                <div>
+                    <label>tds:</label>
+                    <input type="number" name="tds" />
+                </div>
+                <div>
+                    <label>pH:</label>
+                    <input type="number" name="pH" />
+                </div>
+                <div>
+                    <button type="submit" class="btn-submit">Submit</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</body>
+</html>

@@ -3,12 +3,13 @@ import sensorService from "./services/sensorService";
 import sensorDataService from "./services/sensorDataService";
 
 //setup mqtt
-const host = "10.13.9.39";
+const host = "broker.hivemq.com";
 const port = 1883;
 const clientId = `77c4898a-7158-4936-ac62-1681096fd2fd`;
 const connectUrl = `mqtt://${host}:${port}`;
 
-const client = mqtt.connect("mqtt://broker.hivemq.com:1883", {
+const client = mqtt.connect(connectUrl, {
+  // clientId,
   username: "lamntk",
   password: "123",
 }); // create a client

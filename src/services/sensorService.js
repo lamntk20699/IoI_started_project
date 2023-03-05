@@ -37,6 +37,23 @@ const getAllSensors = (sensorId) => {
   });
 };
 
+const getSensorsIdByKeyCode = (sensorKeyCode) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let sensorId = "ERROR";
+      if (sensorKeyCode) {
+        sensors = await db.Sensors.findOne({
+          where: { keyCode: sensorKeyCode },
+        });
+      }
+
+      resolve(sensorId);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 const getAllSensorsByUser = (sensorId, userId) => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -151,6 +168,7 @@ const updateSensorData = (newSensorData) => {
 module.exports = {
   getAllSensors,
   getAllSensorsByUser,
+  getSensorsIdByKeyCode,
   createNewSensor,
   updateSensorData,
   deleteSensor,

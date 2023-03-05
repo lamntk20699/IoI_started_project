@@ -4,6 +4,7 @@ import viewEngine from "./config/viewEngine";
 import initWebRouters from "./route/web";
 import connectDB from "./config/connectDB";
 
+require("./mqtt");
 require("dotenv").config();
 
 const app = express();

@@ -1,28 +1,19 @@
-// get the client
-import mysql from "mysql2";
+const { Sequelize } = require("sequelize");
 
-// create the connection to database
-const connection = mysql.createConnection({
+// Option 3: Passing parameters separately (other dialects)
+const sequelize = new Sequelize("testserver", "root", null, {
   host: "localhost",
-  user: "root",
-  database: "testserver",
+  dialect: "mysql",
+  logging: false,
 });
 
-// simple query
-// connection.query("SELECT * FROM `sensordata`", function (err, results, fields) {
-//   console.log(">>> check mysql:");
-//   console.log(results); // results contains rows returned by server
-//   let rows = results.map((item) => { return item})
-//   //   console.log(fields); // fields contains extra meta data about results, if available
-// });
+let connectDB = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log("Connection has been established successfully.");
+  } catch (error) {
+    console.error("Unable to connect to the database:", error);
+  }
+};
 
-// with placeholder
-// connection.query(
-//   'SELECT * FROM `table` WHERE `name` = ? AND `age` > ?',
-//   ['Page', 45],
-//   function(err, results) {
-//     console.log(results);
-//   }
-// );
-
-export default connection;
+module.exports = connectDB;
